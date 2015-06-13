@@ -10,6 +10,7 @@ var webhooker = require('gitlab-webhooker');
 
 app.use(webhooker.init({
   token: 'qwerty123', // Optional. Secret key
+  port: 4400, // Optional. Listen port
   events: ['push', 'tag_push', 'issue', 'merge_request'], // Optional. Event list for track
   command: 'cd ~/myapp; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi' // Optional. Shell command when triggered
 }));

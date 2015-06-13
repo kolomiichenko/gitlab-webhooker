@@ -1,15 +1,17 @@
 var app = require('orangebox').app(1);
 var exec = require('child_process').exec;
-var path = require('path');
-
+var path = require('path').resolve();
+var extend = require('util')._extend;
 module.exports.init = function(opt) {
 
-  var mainAppPath = path.resolve(__dirname, '../../');
+  var config = {
+    token: '',
+    port: 4400,
+    events: ['push', 'merge_request'],
+    command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi'
+  };
 
-  var config = {};
-  config.token = opt.token || '';
-  config.events = opt.events || ['push', 'merge_request'];
-  config.command = opt.command || 'cd ' + mainAppPath + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi';
+  extend(config, opt);
 
   app.all('/', function(req, res) {
 
@@ -35,7 +37,7 @@ module.exports.init = function(opt) {
     }
   });
 
-  app.listen(4400, function() {
-  	console.log('gitlab-webhooker started on http://localhost:4400');
+  app.listen(config.port, function() {
+  	console.log('gitlab-webhooker started on http://localhost:' + config.port);
   });
 };
