@@ -1,0 +1,42 @@
+{
+  "name": "gitlab-webhooker",
+  "version": "2.0.0",
+  "description": "GitLab web hooks listener",
+  "author": {
+    "name": "Andrii Kolomiichenko",
+    "email": "bboywilld@gmail.com",
+    "url": "http://github.com/kolomiichenko"
+  },
+  "contributors": [
+    {
+      "name": "Andrii Kolomiichenko",
+      "email": "bboywilld@gmail.com"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.10.38"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "http://git@github.com/kolomiichenko/gitlab-webhooker.git"
+  },
+  "keywords": [
+    "git",
+    "gitlab",
+    "webhook",
+    "hook",
+    "listen",
+    "exec"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "orangebox": "^0.3.0"
+  },
+  "readme": "README.md",
+  "gitHead": "b0cc91b1f8f3c22f9b345d45f63659b6b3939979",
+  "bugs": {
+    "url": "http://github.com/kolomiichenko/gitlab-webhooker/issues"
+  },
+  "homepage": "http://github.com/kolomiichenko/gitlab-webhooker"
+}

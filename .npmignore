@@ -1,0 +1,12 @@
+# file of projects
+*.sublime-*
+nbproject/
+.idea/
+
+# npm modules
+node_modules/
+
+# logs
+npm-debug.log
+
+.DS_Store
