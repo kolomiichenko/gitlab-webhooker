@@ -2,6 +2,7 @@ var app = require('orangebox').app(1);
 var exec = require('child_process').exec;
 var path = require('path').resolve();
 var extend = require('util')._extend;
+
 module.exports.init = function(opt) {
 
   var config = {
@@ -18,7 +19,7 @@ module.exports.init = function(opt) {
     try {
       var json = JSON.parse(Object.keys(req.body)[0]);
     } catch (e) {
-      console.error('gitlab-hooker: Post data are not GitLab JSON');
+      console.error('gitlab-webhooker: Post data are not GitLab JSON');
       var json = {};
     }
 
@@ -33,11 +34,11 @@ module.exports.init = function(opt) {
       });
 
     } else {
-      res.status(400).send({ status: 'Bad Request' });
+      res.status(400).send({ status: 'Bad request' });
     }
   });
 
   app.listen(config.port, function() {
-  	console.log('gitlab-webhooker started on http://localhost:' + config.port);
+    console.log('gitlab-webhooker started on http://localhost:' + config.port);
   });
 };
