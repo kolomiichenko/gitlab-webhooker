@@ -8,7 +8,8 @@ module.exports.init = function(opt) {
   var config = {
     token: '',
     port: 4400,
-    events: ['push', 'merge_request'],
+    branches: '*',
+    events: 'push',
     command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi'
   };
 
@@ -23,13 +24,32 @@ module.exports.init = function(opt) {
       var json = {};
     }
 
-    if (config.token === req.query.token && config.events.indexOf(json.object_kind) !== -1) {
+    var branch = '*';
+    if (config.branches.indexOf('*') === -1) {
+      branch = (json.object_kind === 'push') ? json.ref.split('/').pop() :
+        (json.object_kind === 'merge_request') ? json.object_attributes.target_branch : '*';
+    }
+
+    if (
+      config.token === req.query.token &&
+      config.events.indexOf(json.object_kind) !== -1 &&
+      config.branches.indexOf(branch) !== -1
+    ) {
 
       exec(config.command, function (err, stdout, stderr) {
         if (stderr !== {} && err === null) {
-          res.status(200).send({ status: 'OK', stdout: stdout, stderr: stderr });
+          res.status(200).send({
+            status: 'OK',
+            stdout: stdout,
+            stderr: stderr
+          });
         } else {
-          res.status(500).send({ status: 'Something wrong', stdout: stdout, stderr: stderr, err: err });
+          res.status(500).send({
+            status: 'Something wrong',
+            stdout: stdout,
+            stderr: stderr,
+            err: err
+          });
         }
       });
 
