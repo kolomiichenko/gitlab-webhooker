@@ -2,6 +2,7 @@ var app = require('orangebox').app(1);
 var exec = require('child_process').exec;
 var path = require('path').resolve();
 var extend = require('util')._extend;
+var process = require('process');
 
 module.exports.init = function(opt) {
 
@@ -10,7 +11,8 @@ module.exports.init = function(opt) {
     port: 4400,
     branches: '*',
     events: 'push',
-    command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi'
+    command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi',
+    exit: false
   };
 
   extend(config, opt);
@@ -51,6 +53,7 @@ module.exports.init = function(opt) {
             err: err
           });
         }
+        if (config.exit) process.exit(0);
       });
 
     } else {
