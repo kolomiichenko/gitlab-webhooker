@@ -2,7 +2,6 @@ var app = require('orangebox').app(1);
 var exec = require('child_process').exec;
 var path = require('path').resolve();
 var extend = require('util')._extend;
-var process = require('process');
 
 module.exports.init = function(opt) {
 
