@@ -10,7 +10,7 @@ module.exports.init = function(opt) {
     port: 4400,
     branches: '*',
     events: 'push',
-    command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm install; fi',
+    command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm update; fi',
     exit: false
   };
 
