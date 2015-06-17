@@ -8,14 +8,14 @@ Added token to web hook get URL. For example: `http://myapp.com:4400?token=qwert
 ```javascript
 var webhooker = require('gitlab-webhooker');
 
-app.use(webhooker.init({
+webhooker.init({
   token: 'qwerty123', // Optional. Default: ''. Secret key
   port: 4400, // Optional. Default: 4400. Listen port
   branches: ['master', 'dev'], // Optional. Default '*'. Branches for track
   events: ['push', 'merge_request'], // Optional. Default: 'push'. Event list for track
   command: 'cd ~/myapp; ./deploy.sh', // Optional. Shell command when triggered
   exit: false // process.exit(0) after complete command (if you use Docker)
-}));
+});
 ```
 
 ### NOTE
