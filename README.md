@@ -14,7 +14,7 @@ webhooker.init({
   branches: ['master', 'dev'], // Optional. Default '*'. Branches for track
   events: ['push', 'merge_request'], // Optional. Default: 'push'. Event list for track
   command: 'cd ~/myapp; ./deploy.sh', // Optional. Shell command when triggered
-  exit: false // process.exit(0) after complete command (if you use Docker)
+  exit: true // Optional. Default: false. process.exit(0) after complete command (if you use Docker)
 });
 ```
 
