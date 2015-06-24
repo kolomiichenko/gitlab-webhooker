@@ -10,6 +10,7 @@ module.exports.init = function(opt) {
     port: 4400,
     branches: '*',
     events: 'push',
+    onEvent: null,
     command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm update; fi',
     exit: false
   };
@@ -36,6 +37,8 @@ module.exports.init = function(opt) {
       config.events.indexOf(json.object_kind) !== -1 &&
       config.branches.indexOf(branch) !== -1
     ) {
+
+      if (typeof config.onEvent === 'function') config.onEvent();
 
       exec(config.command, function (err, stdout, stderr) {
         if (stderr !== {} && err === null) {
