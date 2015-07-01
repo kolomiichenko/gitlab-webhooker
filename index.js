@@ -38,23 +38,11 @@ module.exports.init = function(opt) {
       config.branches.indexOf(branch) !== -1
     ) {
 
+      res.status(200).send({status: 'OK'});
+
       if (typeof config.onEvent === 'function') config.onEvent();
 
-      exec(config.command, function (err, stdout, stderr) {
-        if (stderr !== {} && err === null) {
-          res.status(200).send({
-            status: 'OK',
-            stdout: stdout,
-            stderr: stderr
-          });
-        } else {
-          res.status(500).send({
-            status: 'Something wrong',
-            stdout: stdout,
-            stderr: stderr,
-            err: err
-          });
-        }
+      exec(config.command, function(err, stdout, stderr) {
         if (config.exit) process.exit(0);
       });
 
