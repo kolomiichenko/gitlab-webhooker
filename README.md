@@ -16,7 +16,8 @@ webhooker.init({
   onEvent: function(json) { /* some js */ }, // Optional. Default: null. Call before exec command
   condition: function(json){ /* some logic */}, // Optional. Default null. Called to check weather to execute onEvent or not. Use the json from the gitlab request to check some logic.
   command: 'cd ~/myapp; ./deploy.sh', // Optional. Shell command when triggered
-  exit: true // Optional. Default: false. process.exit(0) after complete command (if you use Docker)
+  exit: true, // Optional. Default: false. process.exit(0) after complete command (if you use Docker)
+  logLevel: 'info' // set Loglevel trace, debug, info, warn, error 
 });
 ```
 
