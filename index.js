@@ -33,6 +33,9 @@ module.exports.init = function(opt) {
       var json = {};
     }
 
+    var requestToken = req.header('x-gitlab-token') || req.query.token || false
+    log.debug(requestToken)
+
     var branch = '*';
     if (config.branches.indexOf('*') === -1) {
       branch = (json.object_kind === 'push') ? json.ref.split('/').pop() :
@@ -40,9 +43,9 @@ module.exports.init = function(opt) {
     }
 
     if (
-      config.token === req.query.token &&
       config.events.indexOf(json.object_kind) !== -1 &&
       config.branches.indexOf(branch) !== -1
+      config.token === requestToken &&
     ) {
 
       res.status(200).send({status: 'OK'});
