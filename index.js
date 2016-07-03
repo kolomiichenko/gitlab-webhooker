@@ -62,7 +62,7 @@ module.exports.init = function(opt) {
 
       res.status(200).send({status: 'OK'});
 
-      if (typeof config.onEvent === 'function') config.onEvent();
+      if (typeof config.onEvent === 'function') config.onEvent(json);
 
       exec(config.command, function(err, stdout, stderr) {
         if (config.exit) process.exit(0);
