@@ -27,10 +27,11 @@ module.exports.init = function(opt) {
       log.debug(req);
       var json = JSON.parse(Object.keys(req.body)[0]);
     } catch (e) {
-      console.error('gitlab-webhooker: Post data are not GitLab JSON');
       log.warn('gitlab-webhooker: Post data are not GitLab JSON');
       log.debug(e);
       var json = {};
+      res.status(400).send({status: 'Post data are not GitLab JSON'});
+      return false;
     }
 
     var requestToken = req.header('x-gitlab-token') || req.query.token || false
