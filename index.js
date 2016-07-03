@@ -43,9 +43,20 @@ module.exports.init = function(opt) {
                (json.object_kind === 'build') ? json.ref.split('/').pop() :   json.ref;
     }
 
+    var passed_condition = true
+    if(config.condition && typeof(config.condition) === "function"){
+      passed_condition = config.condition.call(json)
+    }
+    
+
+    log.debug("token: " + requestToken);
+    log.debug("condition: " + passed_condition);
+    log.debug("branch: " + json.ref);
+
     if (
-      config.events.indexOf(json.object_kind) !== -1 &&
+      config.events.includes(json.object_kind) &&
       config.token === requestToken &&
+      passed_condition &&
       config.branches.includes(branch)
     ) {
 
