@@ -37,15 +37,16 @@ module.exports.init = function(opt) {
     log.debug(requestToken)
 
     var branch = '*';
-    if (config.branches.indexOf('*') === -1) {
+    if (!config.branches.includes('*')) {
       branch = (json.object_kind === 'push') ? json.ref.split('/').pop() :
-        (json.object_kind === 'merge_request') ? json.object_attributes.target_branch : '*';
+               (json.object_kind === 'merge_request') ? json.object_attributes.target_branch : 
+               (json.object_kind === 'build') ? json.ref.split('/').pop() :   json.ref;
     }
 
     if (
       config.events.indexOf(json.object_kind) !== -1 &&
-      config.branches.indexOf(branch) !== -1
       config.token === requestToken &&
+      config.branches.includes(branch)
     ) {
 
       res.status(200).send({status: 'OK'});
