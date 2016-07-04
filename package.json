@@ -38,5 +38,8 @@
   "bugs": {
     "url": "http://github.com/kolomiichenko/gitlab-webhooker/issues"
   },
-  "homepage": "http://github.com/kolomiichenko/gitlab-webhooker"
+  "homepage": "http://github.com/kolomiichenko/gitlab-webhooker",
+  "devDependencies": {
+    "loglevel": "^1.4.1"
+  }
 }
