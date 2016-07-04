@@ -12,6 +12,7 @@ module.exports.init = function(opt) {
     branches: '*',
     events: 'push',
     onEvent: null,
+    onSuccess: null,
     command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm update; fi',
     exit: false
     logLevel: 'warn'
@@ -66,6 +67,7 @@ module.exports.init = function(opt) {
       if (typeof config.onEvent === 'function') config.onEvent(json);
 
       exec(config.command, function(err, stdout, stderr) {
+        if (typeof config.onEvent === 'function') config.onSuccess.call(this, json, err, stdout, stderr)
         if (config.exit) process.exit(0);
       });
 
