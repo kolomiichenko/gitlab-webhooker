@@ -46,7 +46,7 @@ module.exports.init = function(opt) {
 
     var passed_condition = true
     if(config.condition && typeof(config.condition) === "function"){
-      passed_condition = config.condition.call(json)
+      passed_condition = config.condition.call(this,json)
     }
     
 
