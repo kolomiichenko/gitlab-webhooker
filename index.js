@@ -14,7 +14,7 @@ module.exports.init = function(opt) {
     onEvent: null,
     onSuccess: null,
     command: 'cd ' + path + '; git pull origin master; if git diff --name-status HEAD HEAD~1 | grep -e package.json -e shrinkwrap.js; then npm update; fi',
-    exit: false
+    exit: false,
     logLevel: 'warn'
   };
 

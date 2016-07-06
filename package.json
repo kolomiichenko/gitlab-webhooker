@@ -1,6 +1,6 @@
 {
   "name": "gitlab-webhooker",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "GitLab web hooks listener",
   "author": {
     "name": "Andrii Kolomiichenko",
@@ -31,7 +31,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "orangebox": "^0.3.0"
+    "orangebox": "^0.3.0",
+    "loglevel": "^1.4.1"
   },
   "readmeFilename": "README.md",
   "gitHead": "b0cc91b1f8f3c22f9b345d45f63659b6b3939979",
