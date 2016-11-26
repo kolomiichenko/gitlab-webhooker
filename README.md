@@ -11,7 +11,7 @@ var webhooker = require('gitlab-webhooker');
 webhooker.init({
   token: 'qwerty123', // Optional. Default: ''. Secret key
   port: 4400, // Optional. Default: 4400. Listen port
-  path: 'webhook', // Optional.  Default '/'
+  path: '/webhook', // Optional.  Default '/'
   branches: ['master', 'dev'], // Optional. Default '*'. Branches for track
   events: ['push', 'merge_request'], // Optional. Default: 'push'. Event list for track
   onEvent: function(json) { /* some js */ }, // Optional. Default: null. Call before exec command
