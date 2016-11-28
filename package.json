@@ -1,6 +1,6 @@
 {
   "name": "gitlab-webhooker",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "GitLab web hooks listener",
   "author": {
     "name": "Andrii Kolomiichenko",

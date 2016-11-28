@@ -9,6 +9,7 @@ module.exports.init = function(opt) {
   var config = {
     token: '',
     port: 4400,
+    path: '/',
     branches: '*',
     events: 'push',
     onEvent: null,
@@ -21,7 +22,7 @@ module.exports.init = function(opt) {
   extend(config, opt);
 
   log.setDefaultLevel(config.logLevel || 'warn')
-  app.all('/', function(req, res) {
+  app.get(config.path, function(req, res) {
 
     try {
       log.info('Request received!');
@@ -41,7 +42,7 @@ module.exports.init = function(opt) {
     var branch = '*';
     if (!config.branches.includes('*')) {
       branch = (json.object_kind === 'push') ? json.ref.split('/').pop() :
-               (json.object_kind === 'merge_request') ? json.object_attributes.target_branch : 
+               (json.object_kind === 'merge_request') ? json.object_attributes.target_branch :
                (json.object_kind === 'build') ? json.ref.split('/').pop() :   json.ref;
     }
 
@@ -49,7 +50,7 @@ module.exports.init = function(opt) {
     if(config.condition && typeof(config.condition) === "function"){
       passed_condition = config.condition.call(this,json)
     }
-    
+
 
     log.debug("token: " + requestToken);
     log.debug("condition: " + passed_condition);
